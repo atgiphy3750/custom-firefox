@@ -1,0 +1,39 @@
+@namespace url('http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul');
+
+#context_reloadTab,
+#context_toggleMuteTab,
+#context_pinTab,
+#context_bookmarkTab,
+#context_moveTabOptions,
+#context_reopenInContainer,
+#context_selectAllTabs,
+#context_closeTab,
+#context_closeTabOptions,
+#context_sendTabToDevice,
+#toolbar-context-openANewTab,
+#context_openANewTab,
+#context_shareTabURL,
+menupopup#tabContextMenu menuseparator,
+#toolbarNavigatorItemsMenuSeparator {
+	display: none;
+}
+
+#context_duplicateTab {
+	-moz-box-ordinal-group: 100;
+}
+
+#toolbar-context-reloadSelectedTab,
+#toolbar-context-bookmarkSelectedTab,
+#toolbar-context-selectAllTabs,
+#toolbarItemsMenuSeparator,
+#viewToolbarsMenuSeparator,
+#toggle_toolbar-menubar,
+#toggle_PersonalToolbar,
+menupopup#toolbar-context-menu menuitem.viewCustomizeToolbar {
+	display: none;
+}
+
+.identity-color-pink {
+	--identity-tab-color: #000 !important;
+	--identity-icon-color: #000 !important;
+}

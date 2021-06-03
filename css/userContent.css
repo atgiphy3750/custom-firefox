@@ -1,0 +1,13 @@
+@-moz-document url(about:newtab), url(about:home) {	
+	.search-wrapper {
+		padding: 0 !important;
+	}
+
+	.search-inner-wrapper {
+		display: none !important;
+	}
+
+	.icon.icon-pin-small {
+		display: none !important;
+	}
+}
