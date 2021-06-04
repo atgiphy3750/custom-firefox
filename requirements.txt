@@ -1,0 +1,5 @@
+cairocffi==1.2.0
+CairoSVG==2.5.2
+cssselect2==0.4.1
+Pillow==8.2.0
+tinycss2==1.1.0
