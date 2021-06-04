@@ -1,5 +1,6 @@
 from cairosvg import svg2png
 from PIL import Image, ImageOps
+import numpy as np
 import sys
 import io
 
@@ -20,17 +21,26 @@ def simpleicons2image(name: str, size: int = 512):
         return False
 
 
+def image_color(image, color):
+    data = np.array(image)
+    r, g, b, a = data.T
+    area = (r == 255) & (g == 255) & (b == 255)
+    data[..., :-1][area.T] = color
+    result = Image.fromarray(data)
+    return result
+
+
 def image_invert(image) -> Image:
     if image.mode == 'RGBA':
-        r,g,b,a = image.split()
-        rgb_image = Image.merge('RGB', (r,g,b))
+        r, g, b, a = image.split()
+        rgb_image = Image.merge('RGB', (r, g, b))
 
         inverted_image = ImageOps.invert(rgb_image)
 
-        r2,g2,b2 = inverted_image.split()
+        r2, g2, b2 = inverted_image.split()
 
-        inverted = Image.merge('RGBA', (r2,g2,b2,a))
-    else :
+        inverted = Image.merge('RGBA', (r2, g2, b2, a))
+    else:
         inverted = ImageOps.invert(image)
     return inverted
 
@@ -44,9 +54,14 @@ def image_bg(image, name: str, color):
 def rainmeterpng(name, color):
     image = simpleicons2image(name)
     if image:
-        image = image_invert(image)
-        image = image_bg(image, name, color)
-        image.save(f"./icons/{name}.png", "PNG")
+        image_main_shape = image_color(image, color)
+        image_main = image_bg(image_main_shape, name, "#ffffff00")
+
+        image_over_shape = image_color(image, "#ffffff00")
+        image_over = image_bg(image_over_shape, name, color)
+
+        image_main.save(f"./icons/{name}.png", "PNG")
+        image_over.save(f"./icons/{name}_over.png", "PNG")
         print(f"Saved {name}.png with given background color.")
 
 
